@@ -1,0 +1,102 @@
+! This file contains commands to be read in for a Pythia8 run.
+! Lines not beginning with a letter or digit are comments.
+! Names are case-insensitive  -  but spellings-sensitive!
+! The settings here are illustrative, not always physics-motivated.
+! You should carefully consider what changes need be done for the
+! process you study currently, and consider some of the options
+! as reasonable measures of uncertainties in the matching process.
+
+Main:numberOfEvents = 1000
+Main:timesAllowErrors = 10         ! how many aborts before run stops
+
+! 2) Settings related to output in init(), next() and stat().
+Init:showChangedSettings = on      ! list changed settings
+Init:showChangedParticleData = off ! list changed particle data
+Next:numberCount = 500             ! print message every n events
+Next:numberShowInfo = 3            ! print event information n times
+Next:numberShowProcess = 0         ! print process record n times
+Next:numberShowEvent = 10           ! print event record n times
+
+! 3) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
+Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
+Beams:eCM = 13000.                 ! CM energy of collision
+
+! 4) Settings for the hard-process generation.
+!WeakSingleBoson:all = on
+!WeakSingleBoson:ffbar2gmZ = on
+!WeakSingleBoson:ffbar2W = on
+WeakSingleBoson:ffbar2ffbar(s:gmZ) = on
+!WeakBosonAndParton:qqbar2gmZg = on
+!WeakBosonAndParton:qg2gmZq  = on
+!WeakBosonAndParton:all = on
+!HiggsSM:qg2Hq = on
+!PhaseSpace:pTHatMin = 500.
+PhaseSpace:mHatMin = 60.
+
+! Further options (optional, for tryout)
+
+Tune:ee = 3   !  For 4C
+Tune:pp = 5 ! "Tune 4C"
+
+! PDF:pSet                  =LHAPDF6:CT14lo.LHgrid
+
+ParticleDecays:limitTau0 = on
+ParticleDecays:tauMax = 10
+
+!BeamRemnants:primordialKT = off
+!SpaceShower:QCDshower = off
+!TimeShower:QCDshower  = off
+!PartonLevel:FSR = off
+!PartonLevel:ISR = off
+PartonLevel:MPI           = off
+!HadronLevel:all          = off
+
+! New Tune parameters CUETP8s1 (CTEQ6L1) 
+MultipartonInteractions:pT0Ref = 2.10
+MultipartonInteractions:ecmPow = 0.211
+MultipartonInteractions:expPow = 1.61
+ColourReconnection:range = 3.31
+! par1-
+!ColourReconnection:range  3.029555e+00
+!MultipartonInteractions:ecmPow  1.913433e-01
+!MultipartonInteractions:expPow  1.608751e+00
+!MultipartonInteractions:pT0Ref  2.100585e+00
+! par1+
+!ColourReconnection:range  3.608660e+00
+!MultipartonInteractions:ecmPow  2.306876e-01
+!MultipartonInteractions:expPow  1.609046e+00
+!MultipartonInteractions:pT0Ref  2.100657e+00
+! par2-
+!ColourReconnection:range  3.312607e+00
+!MultipartonInteractions:ecmPow  2.101292e-01
+!MultipartonInteractions:expPow  1.601963e+00
+!MultipartonInteractions:pT0Ref  2.067824e+00
+! par2+
+! ColourReconnection:range  3.312530e+00
+!MultipartonInteractions:ecmPow  2.110370e-01
+!MultipartonInteractions:expPow  1.616200e+00
+!MultipartonInteractions:pT0Ref  2.135179e+00
+! par3-
+!ColourReconnection:range  3.311192e+00
+!MultipartonInteractions:ecmPow  2.308196e-01
+!MultipartonInteractions:expPow  1.612574e+00
+!MultipartonInteractions:pT0Ref  2.099568e+00
+! par3+
+!ColourReconnection:range  3.313884e+00
+!MultipartonInteractions:ecmPow  1.912407e-01
+!MultipartonInteractions:expPow  1.605383e+00
+!MultipartonInteractions:pT0Ref  2.101625e+00
+! par4-
+!ColourReconnection:range  3.313885e+00
+!MultipartonInteractions:ecmPow  1.904595e-01
+!MultipartonInteractions:expPow  1.713808e+00
+!MultipartonInteractions:pT0Ref  2.078716e+00
+! par4+
+!ColourReconnection:range  3.311240e+00
+!MultipartonInteractions:ecmPow  2.309008e-01
+!MultipartonInteractions:expPow  1.502845e+00
+!MultipartonInteractions:pT0Ref  2.122761e+00
+
+! 3) Settings related to output
+Main:writeHepMC = on

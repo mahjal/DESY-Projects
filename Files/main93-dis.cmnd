@@ -1,0 +1,80 @@
+! This file contains commands to be read in for a Pythia8 run.
+! Lines not beginning with a letter or digit are comments.
+! Names are case-insensitive  -  but spellings-sensitive!
+! The settings here are illustrative, not always physics-motivated.
+! You should carefully consider what changes need be done for the
+! process you study currently, and consider some of the options
+! as reasonable measures of uncertainties in the matching process.
+
+!Main:numberOfEvents = 500000
+Main:numberOfEvents = 10 
+! Main:timesAllowErrors = 10         ! how many aborts before run stops
+Main:timesAllowErrors    = 1000
+
+! 2) Settings related to output in init(), next() and stat().
+Init:showChangedSettings = on      ! list changed settings
+Init:showChangedParticleData = off ! list changed particle data
+Next:numberCount = 500             ! print message every n events
+Next:numberShowInfo = 3            ! print event information n times
+Next:numberShowProcess = 0         ! print process record n times
+Next:numberShowEvent = 2           ! print event record n times
+
+! 3) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 11                   ! first beam, p = 2212, pbar = -2212
+Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
+Beams:frameType = 2   ! beams with different energy
+Beams:eA = 26.7
+Beams:eB = 820
+
+! Set up DIS process within some phase space.
+! Neutral current (with gamma/Z interference).
+WeakBosonExchange:ff2ff(t:gmZ) = on
+! Phase-space cut: minimal Q2 of process.
+PhaseSpace:Q2min =25.
+
+! Set dipole recoil on. Necessary for DIS + shower.
+SpaceShower:dipoleRecoil = on
+! Allow emissions up to the kinematical limit,
+! since rate known to match well to matrix elements everywhere.
+SpaceShower:pTmaxMatch = 2
+! QED radiation off lepton not handled yet by the new procedure.
+PDF:lepton = off
+TimeShower:QEDshowerByL = off
+BeamRemnants:primordialKT = off
+! Further options (optional, for tryout)
+!PDF:pSet = LHAPDF6:CT14nlo
+PDF:pSet = LHAPDF6:cteq6l1
+Tune:preferLHAPDF = 2
+Tune:ee = -1
+! Tune:pp = 7  
+
+ParticleDecays:limitTau0 = on
+ParticleDecays:tauMax = 10
+
+PartonLevel:MPI           = off
+!HadronLevel:all          = on
+PartonLevel:ISR = on
+PartonLevel:FSR = on
+
+! New Tune parameters CUETP8M1 
+!Nominal values:
+MultipartonInteractions:ecmPow  =2.520798e-01
+MultipartonInteractions:pT0Ref  =2.402374e+00
+MultipartonInteractions:expPow = 1.6e+00
+ColourReconnection:range =  1.80
+! 
+! 1+
+!MultipartonInteractions:ecmPow  =2.232441e-01
+!MultipartonInteractions:pT0Ref  =2.395187e+00
+! 2+
+!MultipartonInteractions:ecmPow  =2.638016e-01
+!MultipartonInteractions:pT0Ref  =2.355347e+00
+! 1-
+!MultipartonInteractions:ecmPow  =2.781201e-01
+!MultipartonInteractions:pT0Ref  =2.408865e+00
+! 2-
+!MultipartonInteractions:ecmPow  =2.391781e-01
+!MultipartonInteractions:pT0Ref  =2.454135e+00
+
+! 3) Settings related to output
+Main:writeHepMC = on

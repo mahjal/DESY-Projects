@@ -1,0 +1,65 @@
+#!/bin/zsh
+#
+#
+#
+jobname=pythia8-QCD
+name=$jobname-$SGE_TASK_ID
+echo $name 
+
+output=/afs/desy.de/user/s/school70/www/pythia/outfile
+
+#nfile=$[200+$SGE_TASK_ID]
+nfile=$[1+$SGE_TASK_ID]
+
+cd $TMP
+
+pwd=`pwd`
+echo $pwd
+
+export PYSEED=$SGE_TASK_ID
+echo 'seed ' $PYSEED 
+
+
+source /afs/desy.de/user/j/jung/public/summerstudents/2023/setup.sh
+
+mkdir bin
+cd bin
+cp -rp /afs/desy.de/user/j/jung/public/summerstudents/2023/pythia/main93 .
+cp /afs/desy.de/user/j/jung/public/summerstudents/2023/pythia/main93-all.cmnd .
+cp -rp /afs/desy.de/user/j/jung/public/summerstudents/2023/plugins/*.so .
+cp -rp /afs/desy.de/user/j/jung/public/summerstudents/2023/plugins/*.info .
+cp -rp /afs/desy.de/user/j/jung/public/summerstudents/2023/plugins/*.yod* .
+
+cp main93-all.cmnd steer
+sed  "s/Random:seed=67/Random:seed=$PYSEED/" steer >| main93.cmnd
+more main93.cmnd
+
+export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD
+export RIVET_ANALYSIS_PATH=$PWD
+echo ' RIVET_ANALYSIS_PATH = ' $RIVET_ANALYSIS_PATH
+echo ' RIVET_REF_PATH = ' $RIVET_REF_PATH
+
+
+#export PYTHIA8DATA=/afs/desy.de/group/alliance/mcg/public/MCGenerators/pythia83/pythia8306/local/share/Pythia8/xmldoc
+
+
+ 
+export GFORTRAN_UNBUFFERED_ALL=y
+
+ls -rtl
+
+./main93 -c main93.cmnd > ${name}.out
+
+echo ' after the job finished '
+echo $pwd
+rm ${outfile}
+ls -rtl 
+
+
+
+scp ${name}.out  ${output}/.
+mv Rivet.yoda ${name}.yoda
+scp ${name}.yoda  ${output}/.
+
+ls -rtl $TMP
+

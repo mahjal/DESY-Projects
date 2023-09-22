@@ -1,0 +1,7 @@
+DEBUG(0)::deduce_reader: the file /tmp/jung/myhepmc.fifo is a pipe
+DEBUG(0)::Attempt ReaderAsciiHepMC2
+
+
+
+
+Rivet.AnalysisHandler: INFO  Using named weights

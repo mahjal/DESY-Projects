@@ -1,0 +1,38 @@
+! 1) Settings used in the main program.
+Main:numberOfEvents = 1000         ! number of events to generate
+Main:timesAllowErrors = 10         ! how many aborts before run stops
+
+! 2) Settings related to output in init(), next() and stat().
+Init:showChangedSettings = on      ! list changed settings
+Init:showChangedParticleData = off ! list changed particle data
+Next:numberCount = 500             ! print message every n events
+Next:numberShowInfo = 3            ! print event information n times
+Next:numberShowProcess = 0         ! print process record n times
+Next:numberShowEvent = 10           ! print event record n times
+
+! 3) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 11                    ! first beam, positron = 11
+Beams:idB = -11                   ! second beam, electron =-11
+Beams:eCM = 92.                   ! CM energy of collision
+ 
+! 4) Settings for the hard-process generation.
+
+WeakSingleBoson:ffbar2gmZ = on
+
+! Further options (optional, for tryout)
+
+
+Tune:ee = 7   !  Monash 2013 tune
+
+ParticleDecays:limitTau0 = on
+ParticleDecays:tauMax = 10
+
+PDF:lepton = off
+
+! additional switches
+!23:onMode = off
+!23:onIfAny = 13  ! allow only muon decay
+!HadronLevel:all          = off
+!PartonLevel:ISR = off
+!PartonLevel:FSR = off
+

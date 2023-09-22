@@ -1,0 +1,86 @@
+! This file contains commands to be read in for a Pythia8 run.
+! Lines not beginning with a letter or digit are comments.
+! Names are case-insensitive  -  but spellings-sensitive!
+! The settings here are illustrative, not always physics-motivated.
+! You should carefully consider what changes need be done for the
+! process you study currently, and consider some of the options
+! as reasonable measures of uncertainties in the matching process.
+
+!Main:numberOfEvents = 500000
+Main:numberOfEvents = 1000
+! Main:timesAllowErrors = 10         ! how many aborts before run stops
+Main:timesAllowErrors    = 10000
+
+! 2) Settings related to output in init(), next() and stat().
+Init:showChangedSettings = on      ! list changed settings
+Init:showChangedParticleData = off ! list changed particle data
+Next:numberCount = 500             ! print message every n events
+Next:numberShowInfo = 3            ! print event information n times
+Next:numberShowProcess = 0         ! print process record n times
+Next:numberShowEvent = 0           ! print event record n times
+
+! 3) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
+Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
+Beams:eCM = 13000.                 ! CM energy of collision
+
+! 4) Settings for the hard-process generation.
+!HardQCD:all = on                   ! Allow total sigma = elastic/SD/DD/ND
+!PhaseSpace:pTHatMin = 100.
+!SoftQCD:all = on                   ! Allow total sigma = elastic/SD/DD/ND
+! Optionally only study one or a few processes at a time.
+#SoftQCD:elastic = on               ! Elastic
+#SoftQCD:singleDiffractive = on     ! Single diffractive
+#SoftQCD:doubleDiffractive = on     ! Double diffractive
+#SoftQCD:centralDiffractive = on    ! Central diffractive
+SoftQCD:nonDiffractive = on        ! Nondiffractive (inelastic)
+#SoftQCD:inelastic = on             ! All inelastic
+
+! 5) Optionally switch on hand-set cross section and Coulomb term.
+! Note: these values are illustrative only, not to be taken seriously.
+#SigmaTotal:setOwn = on             ! set your own total/elastic/diffr. sigma
+#SigmaTotal:sigmaTot = 106.         ! total cross section (excluding Coulomb)
+#SigmaTotal:sigmaXX = 5.            ! reduce double diffractive cross section
+#SigmaElastic:setOwn = on           ! suboption for Coulomb term in elastic
+#SigmaElastic:tAbsMin = 4e-5        ! divergence requires lower cutoff
+
+! 6) Optionally select diffractive model.
+#Diffraction:PomFlux = 5             ! the MBR model for diffraction
+
+
+! Further options (optional, for tryout)
+
+
+Tune:ee = 7   !  Monash 2013 tune
+Tune:pp = 14   !  Monash 2013 tune
+
+ParticleDecays:limitTau0 = on
+ParticleDecays:tauMax = 10
+
+PartonLevel:MPI           = off
+PartonLevel:FSR = off
+PartonLevel:ISR = off
+HadronLevel:all          = off
+
+! New Tune parameters CUETP8M1 
+!Nominal values:
+MultipartonInteractions:ecmPow  =2.520798e-01
+MultipartonInteractions:pT0Ref  =2.402374e+00
+MultipartonInteractions:expPow = 1.6e+00
+ColourReconnection:range =  1.80
+! 
+! 1+
+!MultipartonInteractions:ecmPow  =2.232441e-01
+!MultipartonInteractions:pT0Ref  =2.395187e+00
+! 2+
+!MultipartonInteractions:ecmPow  =2.638016e-01
+!MultipartonInteractions:pT0Ref  =2.355347e+00
+! 1-
+!MultipartonInteractions:ecmPow  =2.781201e-01
+!MultipartonInteractions:pT0Ref  =2.408865e+00
+! 2-
+!MultipartonInteractions:ecmPow  =2.391781e-01
+!MultipartonInteractions:pT0Ref  =2.454135e+00
+
+! 3) Settings related to output
+Main:writeHepMC = on
